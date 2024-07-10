@@ -1,6 +1,18 @@
+class GameResult:
+    def __init__(self, solved, strikes, balls):
+        self.solved = solved
+        self.strikes = strikes
+        self.balls = balls
+
 class Baseball:
-    def guess(self, number: str):
+    def __init__(self):
+        self.answer = ""
+
+    def guess(self, number: str) -> GameResult:
         self.assert_illegal_value(number)
+        if number == self.answer:
+            return GameResult(True, 3, 0)
+
 
     def assert_illegal_value(self, number):
         if number is None:
