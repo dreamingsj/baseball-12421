@@ -30,4 +30,12 @@ class TestBaseball(TestCase):
         self.assertEqual(3, result.strikes)
         self.assertEqual(0, result.balls)
 
+    def test_return_unmatched_number(self):
+        self.game.answer = "123"
+        result = self.game.guess("456")
+
+        self.assertIsNotNone(result)
+        self.assertFalse(result.solved)
+        self.assertEqual(0, result.strikes)
+        self.assertEqual(0, result.balls)
 

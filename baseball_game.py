@@ -4,6 +4,7 @@ class GameResult:
         self.strikes = strikes
         self.balls = balls
 
+
 class Baseball:
     def __init__(self):
         self.answer = ""
@@ -12,7 +13,8 @@ class Baseball:
         self.assert_illegal_value(number)
         if number == self.answer:
             return GameResult(True, 3, 0)
-
+        else:
+            return GameResult(False, 0, 0)
 
     def assert_illegal_value(self, number):
         if number is None:
