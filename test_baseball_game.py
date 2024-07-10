@@ -28,6 +28,18 @@ class TestBaseball(TestCase):
     def test_return_unmatched_number(self):
         self.assert_matched_number(self.game.guess("456"), False, 0, 0)
 
+    def test_return_1strike_number(self):
+        self.assert_matched_number(self.game.guess("198"), False, 1, 0)
+
+    def test_return_2strike_number(self):
+        self.assert_matched_number(self.game.guess("128"), False, 2, 0)
+
+    def test_return_1strike_2ball_number(self):
+        self.assert_matched_number(self.game.guess("132"), False, 1, 2)
+
+    def test_return_3ball_number(self):
+        self.assert_matched_number(self.game.guess("231"), False, 0, 3)
+
     def assert_matched_number(self, result, solved, strikes, balls):
         self.assertIsNotNone(result)
         self.assertEqual(solved, result.solved)

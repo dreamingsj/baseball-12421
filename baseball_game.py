@@ -8,13 +8,27 @@ class GameResult:
 class Baseball:
     def __init__(self):
         self.answer = ""
+        self.strike = 0
+        self.ball = 0
 
     def guess(self, number: str) -> GameResult:
         self.assert_illegal_value(number)
         if number == self.answer:
             return GameResult(True, 3, 0)
         else:
-            return GameResult(False, 0, 0)
+            n1, n2, n3 = number
+            a1, a2, a3 = self.answer
+            self.cal_strike_and_ball(a1, n1)
+            self.cal_strike_and_ball(a2, n2)
+            self.cal_strike_and_ball(a3, n3)
+            return GameResult(False, self.strike, self.ball)
+
+    def cal_strike_and_ball(self, a, n):
+        if n in self.answer:
+            if n == a:
+                self.strike += 1
+            else:
+                self.ball += 1
 
     def assert_illegal_value(self, number):
         if number is None:
