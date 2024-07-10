@@ -10,6 +10,7 @@ class TestBaseball(TestCase):
     def assert_input_is_wrong(self, number):
        try:
             self.game.guess(number)
+            self.fail()
        except TypeError:
             pass
 
@@ -18,5 +19,6 @@ class TestBaseball(TestCase):
         self.assert_input_is_wrong("12")
         self.assert_input_is_wrong("1234")
         self.assert_input_is_wrong("12s")
+        self.assert_input_is_wrong("121")
 
 
