@@ -6,6 +6,7 @@ from baseball_game import Baseball, GameResult
 class TestBaseball(TestCase):
     def setUp(self):
         self.game = Baseball()
+        self.game.answer = "123"
 
     def assert_input_is_wrong(self, number):
        try:
@@ -22,20 +23,14 @@ class TestBaseball(TestCase):
         self.assert_input_is_wrong("121")
 
     def test_return_solve_result_if_matched_number(self):
-        self.game.answer = "123"
-        result: GameResult = self.game.guess("123")
-
-        self.assertIsNotNone(result)
-        self.assertTrue(result.solved)
-        self.assertEqual(3, result.strikes)
-        self.assertEqual(0, result.balls)
+        self.assert_matched_number(self.game.guess("123"), True, 3, 0)
 
     def test_return_unmatched_number(self):
-        self.game.answer = "123"
-        result = self.game.guess("456")
+        self.assert_matched_number(self.game.guess("456"), False, 0, 0)
 
+    def assert_matched_number(self, result, solved, strikes, balls):
         self.assertIsNotNone(result)
-        self.assertFalse(result.solved)
-        self.assertEqual(0, result.strikes)
-        self.assertEqual(0, result.balls)
+        self.assertEqual(solved, result.solved)
+        self.assertEqual(strikes, result.strikes)
+        self.assertEqual(balls, result.balls)
 
