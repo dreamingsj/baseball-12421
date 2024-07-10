@@ -34,6 +34,9 @@ class TestBaseball(TestCase):
     def test_return_2strike_number(self):
         self.assert_matched_number(self.game.guess("128"), False, 2, 0)
 
+    def test_return_1strike_1ball_number(self):
+        self.assert_matched_number(self.game.guess("142"), False, 1, 1)
+
     def test_return_1strike_2ball_number(self):
         self.assert_matched_number(self.game.guess("132"), False, 1, 2)
 
